@@ -1,76 +1,86 @@
 // =============================================================================
-// DAFTAR RIWAYAT HIDUP MAHASISWA PKL
+// DAFTAR RIWAYAT HIDUP (Sesuai Lampiran 25 Pedoman PKL UBSI)
 // =============================================================================
+#import "../../lib.typ": *
+#import "../metadata.typ": *
+
 #pagebreak()
 #align(center)[
   #text(size: 14pt, weight: "bold")[DAFTAR RIWAYAT HIDUP]
 ]
 #v(1.5em)
 
-#text(weight: "bold")[I. DATA PRIBADI]
-#v(0.3cm)
+#set par(leading: 6pt) // 1 Spasi sesuai Catatan Lampiran 25
+
+#text(weight: "bold")[I.     Biodata Mahasiswa]
+#v(0.2cm)
+#pad(left: 0.8cm)[
+  #table(
+    columns: (4.5cm, 0.3cm, 1fr),
+    stroke: none,
+    inset: (y: 3pt),
+    [NIM], [:], [#nim],
+    [Nama Lengkap], [:], [#penulis],
+    [Tempat/ Tanggal Lahir], [:], [Jakarta, 1 Januari 2003],
+    [Alamat lengkap], [:], [Jl. Raya Kampus UBSI No. 12, Kelurahan Slipi, Jakarta Barat 11480],
+  )
+]
+
+#v(0.5cm)
+#text(weight: "bold")[II.    Pendidikan]
+#v(0.2cm)
+#pad(left: 0.8cm)[
+  #text(weight: "bold")[a.  Formal]
+  #v(0.1cm)
+  #pad(left: 0.5cm)[
+    1. SD Negeri 01 Jakarta, lulus tahun 2015\
+    2. SMP Negeri 01 Jakarta, lulus tahun 2018\
+    3. SMA Negeri 01 Jakarta, lulus tahun 2021\
+    4. Universitas Bina Sarana Informatika (#program-studi, Sarjana), sedang ditempuh
+  ]
+  #v(0.3cm)
+  #text(weight: "bold")[b.  Tidak Formal]
+  #v(0.1cm)
+  #pad(left: 0.5cm)[
+    1. Kursus Bahasa Inggris (General English) di Lembaga Bahasa LIA, tahun 2022\
+    2. Pelatihan Pemrograman Web & Database Administrator di BSI Career Center, tahun 2023\
+    3. Sertifikasi Fundamental Jaringan Komputer, tahun 2024
+  ]
+]
+
+#v(0.5cm)
+#text(weight: "bold")[III.   Riwayat Pengalaman berorganisasi / perkerjaan]
+#v(0.2cm)
+#pad(left: 0.8cm)[
+  1. Pengurus Himpunan Mahasiswa Teknologi Informasi UBSI, tahun 2023 s.d 2024\
+  2. Panitia Seminar Nasional Teknologi Informasi UBSI, tahun 2024\
+  3. Anggota Komunitas Linux & Jaringan Komputer Mahasiswa, tahun 2023 s.d sekarang
+]
+
+#v(1cm)
 #grid(
-  columns: (1fr, 3.5cm),
+  columns: (3.5cm, 1fr),
   gutter: 1cm,
   [
-    #table(
-      columns: (3.5cm, 0.3cm, 1fr),
-      stroke: none,
-      inset: (y: 4pt),
-      [Nama Lengkap], [:], [#penulis],
-      [NIM], [:], [#nim],
-      [Tempat, Tgl Lahir], [:], [Jakarta, 1 Januari 2003],
-      [Jenis Kelamin], [:], [Laki-laki / Perempuan],
-      [Agama], [:], [Islam],
-      [Alamat Rumah], [:], [Jl. Raya Kampus UBSI No. 12, Jakarta],
-      [No. Telepon / HP], [:], [0812-3456-7890],
-      [Email Mahasiswa], [:], [#nim@student.ubsi.ac.id],
-    )
+    #rect(width: 3cm, height: 4cm, stroke: 1pt + black)[
+      #set align(center + horizon)
+      #text(size: 10pt)[Foto\ 3x4]
+    ]
   ],
   [
-    #align(center + horizon)[
-      #rect(width: 3cm, height: 4cm, stroke: 1pt + black)[
-        #set align(center + horizon)
-        #text(size: 10pt)[Pas Foto\ 3 x 4]
+    #align(right)[
+      #block(width: 7cm)[
+        #set align(left)
+        #kota, Desember #tahun\
+        \
+        #v(1.8cm)
+        #underline(penulis)
       ]
     ]
   ]
 )
 
-#v(1cm)
-#text(weight: "bold")[II. RIWAYAT PENDIDIKAN FORMAL]
-#v(0.3cm)
-#table(
-  columns: (3.5cm, 1fr, 3cm),
-  stroke: (x, y) => if y == 0 { (bottom: 1pt + black) } else { none },
-  inset: 6pt,
-  [*Tahun Lulus*], [*Nama Sekolah / Institusi*], [*Keterangan*],
-  [2015], [SD Negeri 01 Pagi Jakarta], [Sekolah Dasar],
-  [2018], [SMP Negeri 01 Jakarta], [SMP],
-  [2021], [SMA Negeri 01 Jakarta], [SMA / SMK],
-  [#tahun], [#universitas], [Sarjana (S1)],
-)
-
-#v(1cm)
-#text(weight: "bold")[III. RIWAYAT PENGALAMAN KERJA / ORGANISASI]
-#v(0.3cm)
-#table(
-  columns: (3.5cm, 1fr, 3.5cm),
-  stroke: (x, y) => if y == 0 { (bottom: 1pt + black) } else { none },
-  inset: 6pt,
-  [*Tahun*], [*Instansi / Perusahaan*], [*Jabatan / Peran*],
-  [2023 - 2024], [Himpunan Mahasiswa Teknologi Informasi], [Staff Divisi Litbang],
-  [2024 - 2025], [Laboratorium Komputer UBSI], [Asisten Laboratorium],
-)
-
-#v(1.5cm)
-#align(right)[
-  #block(width: 6cm)[
-    #set align(left)
-    #kota, #tahun\
-    \
-    #v(1.5cm)
-    *#penulis*\
-    NIM. #nim
-  ]
+#v(1fr)
+#text(size: 9pt, style: "italic")[
+  *Catatan: Diketik dengan jarak satu spasi, dan tempelkan pas photo berlatar warna merah serta berdasi mengenakan jaket almamater*
 ]
