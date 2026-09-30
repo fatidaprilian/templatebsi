@@ -1,11 +1,13 @@
-// Template Utama Tugas Akhir / Skripsi / PKL UBSI
-// Program Studi Teknologi Informasi
+// =============================================================================
+// MAIN ENTRYPOINT: LAPORAN / PROPOSAL PKL UBSI
+// Program Studi: Teknologi Informasi
+// =============================================================================
 
-#import "../lib.typ": templatebsi, cover-ubsi
+#import "../lib.typ": pkl, cover-pkl, frontmatter-pkl
 #import "metadata.typ": *
 
-// 1. Render Cover Dokumen
-#cover-ubsi(
+// 1. Render Cover Dokumen (Halaman i, nomor halaman tidak dicetak)
+#cover-pkl(
   judul: judul,
   jenis: jenis,
   penulis: penulis,
@@ -15,36 +17,40 @@
   universitas: universitas,
   kota: kota,
   tahun: tahun,
-  logo-path: "gambar/logo-ubsi.png",
+  logo-path: "../public/logo-ubsi.png",
 )
 
-// 2. Terapkan Layout Master Template BSI
-#show: templatebsi.with(
-  judul: judul,
-  jenis: jenis,
-  penulis: penulis,
-  nim: nim,
-  program-studi: program-studi,
-  fakultas: fakultas,
-  universitas: universitas,
-  kota: kota,
-  tahun: tahun,
-)
+// 2. Bagian Awal (Frontmatter: Angka Romawi Kecil di Bawah Tengah)
+#show: frontmatter-pkl
 
-// 3. Halaman Awal (Daftar Isi)
 #outline(
   title: [DAFTAR ISI],
   indent: auto,
   depth: 3,
 )
 
-// 4. Isi Dokumen (Bab)
+// 3. Bagian Pokok (Mainmatter: Angka Latin, Halaman Awal Bab di Bawah Tengah, Lanjutan di Kanan Atas)
+#counter(page).update(1)
+
+#show: pkl.with(
+  judul: judul,
+  jenis: jenis,
+  penulis: penulis,
+  nim: nim,
+  program-studi: program-studi,
+  fakultas: fakultas,
+  universitas: universitas,
+  kota: kota,
+  tahun: tahun,
+)
+
+// Include Bab-bab
 #include "babs/bab1.typ"
 
-// 5. Daftar Pustaka
+// 4. Bagian Akhir: Daftar Pustaka (Wajib APA Style Versi 6)
 #pagebreak()
 #bibliography(
   "pustaka.bib",
   title: [DAFTAR PUSTAKA],
-  style: "ieee",
+  style: "apa",
 )
