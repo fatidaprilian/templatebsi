@@ -4,20 +4,21 @@
 // Outline: Proyek Inovasi Perangkat Lunak (6 Bab)
 // =============================================================================
 
-#import "../lib.typ": pkl, cover-pkl, frontmatter-pkl
+#import "../lib.typ": pkl, cover-pkl, frontmatter-pkl, daftar-gambar, daftar-tabel
 #import "metadata.typ": *
 
-// 1. Lembar Judul Laporan (Cover: nomor i dihitung tapi tidak dicetak)
+// 1. Lembar Judul Laporan (Cover: Lampiran 9 & 10, nomor i dihitung tapi tidak dicetak)
 #cover-pkl(
   judul: judul,
-  jenis: "laporan",
   penulis: penulis,
   nim: nim,
+  jenjang: jenjang,
   program-studi: program-studi,
   fakultas: fakultas,
   universitas: universitas,
   kota: kota,
   tahun: tahun,
+  is-kampus-utama: is-kampus-utama,
   logo-path: "../public/logo-ubsi.png",
 )
 
@@ -41,19 +42,11 @@
 // Daftar Simbol
 #include "bagian-awal/daftar-simbol.typ"
 
-// Daftar Gambar
-#pagebreak()
-#outline(
-  title: [DAFTAR GAMBAR],
-  target: figure.where(kind: image),
-)
+// Daftar Gambar (Sesuai Lampiran 21)
+#daftar-gambar()
 
-// Daftar Tabel
-#pagebreak()
-#outline(
-  title: [DAFTAR TABEL],
-  target: figure.where(kind: table),
-)
+// Daftar Tabel (Sesuai Lampiran 22)
+#daftar-tabel()
 
 // Daftar Lampiran
 #include "bagian-awal/daftar-lampiran.typ"

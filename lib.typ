@@ -419,3 +419,47 @@
     ]
   ]
 }
+
+// =============================================================================
+// HELPER: DAFTAR GAMBAR (Lampiran 21) & DAFTAR TABEL (Lampiran 22)
+// Jarak 1 spasi, kolom Halaman di kanan atas, catatan kaki di bawah
+// =============================================================================
+#let daftar-gambar() = {
+  pagebreak()
+  align(center)[#text(size: 14pt, weight: "bold")[DAFTAR GAMBAR]]
+  v(1em)
+  align(right)[#text(size: 11pt, weight: "regular")[Halaman]]
+  v(0.3em)
+  {
+    set par(leading: 6pt) // 1 Spasi sesuai Catatan 1 Lampiran 21
+    outline(
+      title: none,
+      target: figure.where(kind: image),
+    )
+  }
+  v(1fr)
+  text(size: 9pt, style: "italic")[
+    *Catatan:*\
+    1. Daftar gambar, tabel, lampiran diketik dengan jarak satu spasi.
+  ]
+}
+
+#let daftar-tabel() = {
+  pagebreak()
+  align(center)[#text(size: 14pt, weight: "bold")[DAFTAR TABEL]]
+  v(1em)
+  align(right)[#text(size: 11pt, weight: "regular")[Halaman]]
+  v(0.3em)
+  {
+    set par(leading: 6pt) // 1 Spasi sesuai Catatan 1 Lampiran 22
+    outline(
+      title: none,
+      target: figure.where(kind: table),
+    )
+  }
+  v(1fr)
+  text(size: 9pt, style: "italic")[
+    *Catatan:*\
+    1. Daftar gambar, tabel, lampiran diketik dengan jarak satu spasi.
+  ]
+}
