@@ -4,7 +4,7 @@
 // Outline: Proyek Inovasi Perangkat Lunak (6 Bab)
 // =============================================================================
 
-#import "../lib.typ": pkl, cover-pkl, frontmatter-pkl, daftar-gambar, daftar-tabel
+#import "../lib.typ": *
 #import "metadata.typ": *
 
 // 1. Lembar Judul Laporan (Cover: Lampiran 9 & 10, nomor i dihitung tapi tidak dicetak)
@@ -19,7 +19,7 @@
   kota: kota,
   tahun: tahun,
   is-kampus-utama: is-kampus-utama,
-  logo-path: "../public/logo-ubsi.png",
+  logo-path: "public/logo-ubsi.png",
 )
 
 // 2. Bagian Awal (Frontmatter: Romawi Kecil Bawah Tengah)

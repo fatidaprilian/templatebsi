@@ -34,3 +34,9 @@
 #let kontak-instansi = "(021) 5215123 / info@telkomprima.co.id"
 #let tanggal-mulai-pkl = "1 Agustus 2026"
 #let tanggal-selesai-pkl = "31 Oktober 2026"
+
+// Berkas Bukti Lampiran Perusahaan (Scan PNG/JPG):
+// Biarkan none jika ingin menggunakan template cetak resmi UBSI
+#let file-surat-keterangan = none // contoh: "gambar/scan-surat-keterangan.png"
+#let file-nilai-perusahaan = none  // contoh: "gambar/scan-lembar-nilai.png"
+#let file-bukti-kuesioner = none   // contoh: "gambar/scan-bukti-kuesioner.png"

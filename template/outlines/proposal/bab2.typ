@@ -1,3 +1,5 @@
+#import "../../metadata.typ": *
+
 = Tempat dan Waktu PKL
 
 == Tempat PKL

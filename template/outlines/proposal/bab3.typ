@@ -1,3 +1,5 @@
+#import "../../metadata.typ": *
+
 = Penutup
 
 Demikian Proposal Praktik Kerja Lapangan (PKL) ini kami susun sebagai kerangka acuan dan bentuk permohonan resmi untuk melaksanakan kegiatan Praktik Kerja Lapangan pada #nama-instansi.

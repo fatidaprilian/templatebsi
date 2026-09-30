@@ -96,10 +96,10 @@
     align(center)[
       #v(0.5cm)
       #text(size: 14pt, weight: "bold")[
-        #if it.numbering != none {
-          counter(heading).display()
-          linebreak()
-        }
+        #if it.numbering != none [
+          #counter(heading).display()
+          #linebreak()
+        ]
         #upper(it.body)
       ]
     ]
@@ -160,10 +160,8 @@
   show figure.where(kind: image): set figure(supplement: [Gambar])
   
   // Format Judul Tabel: di atas tengah tabel
-  show figure.where(kind: table): set figure(
-    supplement: [Tabel],
-    caption: (position: top),
-  )
+  show figure.where(kind: table): set figure(supplement: [Tabel])
+  show figure.where(kind: table): set figure.caption(position: top)
 
   body
 }
@@ -176,12 +174,14 @@
   jenis: "laporan", // "laporan" | "proposal"
   penulis: "",
   nim: "",
+  jenjang: "Program Sarjana (S1)",
   program-studi: "Teknologi Informasi",
   fakultas: "Teknik dan Informatika",
   universitas: "Universitas Bina Sarana Informatika",
   kota: "Jakarta",
   tahun: "2026",
-  logo-path: "public/logo-ubsi.png",
+  is-kampus-utama: true,
+  logo-path: "gambar/logo-ubsi.png",
 ) = {
   let label-jenis = if jenis == "proposal" {
     "PROPOSAL PRAKTIK KERJA LAPANGAN"
@@ -210,9 +210,9 @@
 
     // 2. Logo Kampus Berwarna Ukuran Standar (4x4 cm)
     #v(1.2cm)
-    #if logo-path != none {
-      image(logo-path, width: 4cm, height: 4cm)
-    }
+    #if logo-path != none [
+      #image(logo-path, width: 4cm, height: 4cm)
+    ]
 
     // 3. Tulisan PROPOSAL / LAPORAN: 18pt Huruf Kapital, Tebal
     #v(1cm)
@@ -233,7 +233,13 @@
 
     // 6. Nama Prodi, Fakultas, Universitas, Kota, Tahun: 12pt, 1.5 Spasi
     #text(size: 12pt, weight: "bold")[
-      Program Studi #program-studi      Fakultas #fakultas      #universitas      #kota      #tahun
+      Program Studi #program-studi #jenjang\
+      Fakultas #fakultas\
+      #universitas\
+      #if is-kampus-utama and kota != none and kota != "" [
+        #kota\
+      ]
+      #tahun
     ]
   ]
 }
@@ -308,9 +314,9 @@
 
     // 2. Logo Universitas Bina Sarana Informatika Berwarna
     #v(3cm)
-    #if logo-path != none {
-      image(logo-path, width: 4.5cm, height: 4.5cm)
-    }
+    #if logo-path != none [
+      #image(logo-path, width: 4.5cm, height: 4.5cm)
+    ]
 
     #v(3cm)
     // 3. Nama Mahasiswa & NIM

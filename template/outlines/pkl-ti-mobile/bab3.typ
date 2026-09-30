@@ -1,3 +1,5 @@
+#import "../../../lib.typ": *
+
 = Pembahasan
 
 == Tinjauan Kasus Aplikasi Mobile Computing

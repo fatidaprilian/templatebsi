@@ -1,0 +1,29 @@
+{
+  "name": "templatebsi",
+  "version": "1.0.0",
+  "description": "Template Typst Laporan PKL & Proposal UBSI Prodi Teknologi Informasi (S1)",
+  "main": "lib.typ",
+  "bin": {
+    "create-templatebsi": "./bin/cli.js",
+    "templatebsi": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node scripts/test.js",
+    "create": "node bin/cli.js"
+  },
+  "keywords": [
+    "typst",
+    "ubsi",
+    "pkl",
+    "proposal",
+    "template",
+    "skripsi",
+    "teknologi-informasi"
+  ],
+  "author": "fatidaprilian",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fatidaprilian/templatebsi.git"
+  }
+}

@@ -3,7 +3,7 @@
 // Berdasarkan Pedoman Resmi PKL UBSI (Lampiran 1/2, Lampiran 5/6, dan 3 Bab)
 // =============================================================================
 
-#import "../lib.typ": pkl, cover-proposal-pkl, frontmatter-pkl
+#import "../lib.typ": *
 #import "metadata.typ": *
 
 // 1. Lembar Cover Proposal PKL (Lampiran 1 & 2: nomor i dihitung tapi tidak dicetak)
@@ -17,7 +17,7 @@
   kota: kota,
   tahun: tahun,
   is-kampus-utama: is-kampus-utama,
-  logo-path: "../public/logo-ubsi.png",
+  logo-path: "public/logo-ubsi.png",
 )
 
 // 2. Bagian Awal (Frontmatter: Halaman ii dst di Bawah Tengah)

@@ -1,0 +1,10 @@
+# Output kompilasi Typst lokal
+*.pdf
+.typst/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

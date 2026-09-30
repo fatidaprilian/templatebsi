@@ -8,15 +8,15 @@
 #pagebreak()
 
 // Jika mahasiswa memiliki scan surat keterangan asli (JPG/PNG), tampilkan penuh
-#let file-surat-keterangan = none // Ubah menjadi "gambar/surat-pkl.jpg" jika ada scan asli
+// Konfigurasi file-surat-keterangan ada di metadata.typ
 
-#if file-surat-keterangan != none {
+#if file-surat-keterangan != none [
   align(center)[
     #text(size: 14pt, weight: "bold")[SURAT KETERANGAN PKL]
   ]
   #v(0.5cm)
   #image(file-surat-keterangan, width: 100%)
-} else {
+] else [
   // Format Template Resmi UBSI Sesuai Lampiran 26
   align(center)[
     #text(size: 14pt, weight: "bold")[SURAT KETERANGAN PKL]
@@ -86,4 +86,4 @@
     - Surat Keterangan PKL dapat berupa Sertifikat Pelaksanaan Kegiatan\
     - Wajib mencantumkan keterangan telah melaksanakan PKL minimal 3 bulan
   ]
-}
+]
