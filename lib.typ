@@ -277,3 +277,145 @@
 #let sumber(teks) = {
   align(left)[#text(size: 10pt, style: "italic")[Sumber: #teks]]
 }
+
+// =============================================================================
+// LEMBAR COVER PROPOSAL PKL (Lampiran 1 & Lampiran 2)
+// Mendukung Kampus Utama (ada kota) dan Luar Kampus Utama / PSDKU (tanpa kota)
+// =============================================================================
+#let cover-proposal-pkl(
+  judul: "",
+  penulis: "",
+  nim: "",
+  program-studi: "Teknologi Informasi",
+  fakultas: "Teknik dan Informatika",
+  universitas: "Universitas Bina Sarana Informatika",
+  kota: "Jakarta",
+  tahun: "2026",
+  is-kampus-utama: true,
+  logo-path: "../public/logo-ubsi.png",
+) = {
+  page(
+    header: none,
+    footer: none,
+    margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
+  )[
+    #set align(center)
+    #set par(leading: 6pt) // Spasi 1.5
+
+    // 1. Judul Proposal (14pt Huruf Kapital, Tebal)
+    #v(1cm)
+    #text(size: 14pt, weight: "bold")[#upper(judul)]
+
+    // 2. Logo Universitas Bina Sarana Informatika Berwarna
+    #v(3cm)
+    #if logo-path != none {
+      image(logo-path, width: 4.5cm, height: 4.5cm)
+    }
+
+    #v(3cm)
+    // 3. Nama Mahasiswa & NIM
+    #text(size: 14pt, weight: "bold")[#upper(penulis)]\
+    #v(4pt)
+    #text(size: 14pt, weight: "bold")[NIM: #nim]
+
+    #v(1fr)
+
+    // 4. Institusi Bawah (Lampiran 1: dengan Kota; Lampiran 2: tanpa Kota)
+    #text(size: 12pt, weight: "bold")[
+      Program Studi #program-studi\
+      Fakultas #fakultas\
+      #universitas\
+      #if is-kampus-utama and kota != none and kota != "" [
+        #kota\
+      ]
+      #tahun
+    ]
+  ]
+}
+
+// =============================================================================
+// LEMBAR PERSETUJUAN PROPOSAL PKL (Lampiran 5 & Lampiran 6)
+// =============================================================================
+#let persetujuan-proposal-pkl(
+  judul: "",
+  penulis: "",
+  nim: "",
+  jenjang: "Sarjana (S1)",
+  program-studi: "Teknologi Informasi",
+  fakultas: "Teknik dan Informatika",
+  universitas: "Universitas Bina Sarana Informatika",
+  kota: "Jakarta",
+  tahun: "2026",
+  semester: "Gasal",
+  tahun-akademik: "2026",
+  kelas: "",
+  dosen-pa: "",
+  tanggal-persetujuan: none,
+  is-kampus-utama: true,
+) = {
+  page(
+    header: none,
+    footer: context {
+      let page-num = counter(page).display("i")
+      align(center)[#text(size: 10pt)[#page-num]]
+    },
+    margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
+  )[
+    #set par(leading: 8pt) // Spasi pengetikan persetujuan
+
+    #align(center)[
+      #text(size: 14pt, weight: "bold")[
+        PERSETUJUAN\
+        PROPOSAL PRAKTIK KERJA LAPANGAN
+      ]
+    ]
+
+    #v(1cm)
+    Proposal Praktik Kerja Lapangan ini disusun oleh :
+
+    #v(0.3cm)
+    #table(
+      columns: (3.5cm, 0.4cm, 1fr),
+      stroke: none,
+      inset: (y: 4pt),
+      [Nama], [:], [#penulis],
+      [NIM], [:], [#nim],
+      [Jenjang], [:], [#jenjang],
+      [Fakultas], [:], [#fakultas],
+      [Program Studi], [:], [#program-studi],
+    )
+
+    #v(0.5cm)
+    telah *disetujui* untuk permohonan PKL pada periode Semester #semester Tahun Akademik #tahun-akademik di #program-studi#if is-kampus-utama [ #fakultas] #universitas.
+
+    #v(1cm)
+    #align(center)[
+      #let tgl = if tanggal-persetujuan != none { tanggal-persetujuan } else { kota + ", " + datetime.today().display("[day] [month repr:long] [year]") }
+      #tgl\
+      #v(0.3cm)
+      #text(weight: "bold")[
+        DOSEN PENASEHAT AKADEMIK\
+        Kelas #kelas
+      ]\
+      #v(2cm)
+      ttd\
+      #v(0.5cm)
+      *( #dosen-pa )*
+    ]
+
+    #v(1fr)
+
+    // Catatan Kaki Wajib Sesuai Lampiran 5 & 6
+    #block(
+      stroke: none,
+      inset: 0pt,
+    )[
+      #set text(size: 9pt, style: "italic")
+      #set par(leading: 4pt)
+      *Catatan:*\
+      - Nama Kelas diisi dengan kelas pada semester V (Program D3) dan Semester VII (Program S1)\
+      - Nama Dosen PA diisi nama lengkap dan gelar dosen Penasehat Akademik\
+      - Tanda Tangan dosen Penasehat Akademik *wajib* asli
+    ]
+  ]
+}
