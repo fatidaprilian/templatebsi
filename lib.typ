@@ -69,7 +69,7 @@
   set par(
     justify: true,
     leading: 12pt, // Spasi 2
-    first-line-indent: 1cm,
+    first-line-indent: 1.2cm,
   )
 
   // 4. Penomoran Heading Sesuai Pedoman PKL (Poin 2.3 & Gambar):
@@ -252,11 +252,23 @@
   // Melanjutkan dari cover (cover adalah halaman 1 / i tapi tidak dicetak)
   counter(page).update(2)
   set page(
+    paper: "a4",
+    margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
     header: none,
     footer: context {
       let page-num = counter(page).display("i")
       align(center)[#text(size: 10pt)[#page-num]]
     }
+  )
+  set text(
+    font: ("Times New Roman", "Nimbus Roman No9 L", "Liberation Serif"),
+    size: 12pt,
+    lang: "id",
+  )
+  set par(
+    justify: true,
+    leading: 9pt, // 1.5 Spasi untuk bagian awal
+    first-line-indent: 1.2cm, // Alinea baru menjorok 1.2 cm (5-7 ketukan)
   )
   body
 }
@@ -468,4 +480,29 @@
     *Catatan:*\
     1. Daftar gambar, tabel, lampiran diketik dengan jarak satu spasi.
   ]
+}
+
+
+// =============================================================================
+// HELPER: BAGIAN AKHIR (BACKMATTER) - Poin 2.4.3
+// Nomor halaman ditulis di bagian BAWAH TENGAH dengan angka latin (2 cm dari bawah)
+// =============================================================================
+#let backmatter-pkl(body) = {
+  set page(
+    paper: "a4",
+    margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
+    header: none,
+    footer: context {
+      let page-num = counter(page).display("1")
+      align(center)[#text(size: 10pt)[#page-num]]
+    }
+  )
+  set text(
+    font: ("Times New Roman", "Nimbus Roman No9 L", "Liberation Serif"),
+    size: 12pt,
+    lang: "id",
+  )
+  // Aturan 2.7 Poin 7: Setiap pustaka 1 spasi (rata kiri-kanan), antar pustaka 2 spasi
+  show bibliography: set par(leading: 6pt, spacing: 14pt, justify: true)
+  body
 }

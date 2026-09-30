@@ -74,7 +74,8 @@
 #include "outlines/pkl-ti-inovasi/bab5.typ"
 #include "outlines/pkl-ti-inovasi/bab6.typ"
 
-// 4. Bagian Akhir (Backmatter)
+// 4. Bagian Akhir (Backmatter: Sesuai Poin 2.4.3 - Nomor Halaman Bawah Tengah)
+#show: backmatter-pkl
 #pagebreak()
 #bibliography(
   "pustaka.bib",

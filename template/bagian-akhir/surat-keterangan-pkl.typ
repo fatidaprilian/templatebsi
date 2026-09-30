@@ -11,7 +11,7 @@
 // Konfigurasi file-surat-keterangan ada di metadata.typ
 
 #if file-surat-keterangan != none [
-  align(center)[
+  #align(center)[
     #text(size: 14pt, weight: "bold")[SURAT KETERANGAN PKL]
   ]
   #v(0.5cm)

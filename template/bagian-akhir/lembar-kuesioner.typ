@@ -11,13 +11,13 @@
 // Konfigurasi file-bukti-kuesioner ada di metadata.typ
 
 #if file-bukti-kuesioner != none [
-  align(center)[
+  #align(center)[
     #text(size: 14pt, weight: "bold")[LEMBAR KUESIONER]
   ]
   #v(0.5cm)
   #image(file-bukti-kuesioner, width: 100%)
 ] else [
-  align(center)[
+  #align(center)[
     #text(size: 14pt, weight: "bold")[LEMBAR KUESIONER]
   ]
   #v(0.8cm)

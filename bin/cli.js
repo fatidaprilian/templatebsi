@@ -209,11 +209,15 @@ async function main() {
     mainContent = mainContent.replace(/logo-path: "public\/logo-ubsi\.png"/g, 'logo-path: "gambar/logo-ubsi.png"');
 
     const babIncludes = selectedOutline.babs.map(b => `#include "bab/${b}.typ"`).join('\n');
-    mainContent = mainContent.replace(
-      /\/\/ OUTLINE PKL: PROYEK INOVASI PERANGKAT LUNAK \(6 BAB\)[\s\S]*?\/\/ 4\. Bagian Akhir/,
-      `// OUTLINE PKL: ${selectedOutline.name.toUpperCase()}\n${babIncludes}\n\n// 4. Bagian Akhir`
-    );
-
+    const startMarker = '// OUTLINE PKL: PROYEK INOVASI PERANGKAT LUNAK (6 BAB)';
+    const endMarker = '// 4. Bagian Akhir';
+    const sIdx = mainContent.indexOf(startMarker);
+    const eIdx = mainContent.indexOf(endMarker);
+    if (sIdx !== -1 && eIdx !== -1) {
+      mainContent = mainContent.slice(0, sIdx) +
+        `// OUTLINE PKL: ${selectedOutline.name.toUpperCase()}\n${babIncludes}\n\n` +
+        mainContent.slice(eIdx);
+    }
     fs.writeFileSync(path.join(targetDir, 'main.typ'), mainContent, 'utf8');
   }
 

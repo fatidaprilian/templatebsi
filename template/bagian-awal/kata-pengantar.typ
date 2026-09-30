@@ -8,7 +8,7 @@
 #align(center)[
   #text(size: 14pt, weight: "bold")[KATA PENGANTAR]
 ]
-#v(1.5em)
+#v(24pt)
 
 Puji dan syukur penulis panjatkan ke hadirat Tuhan Yang Maha Esa atas berkat, rahmat, dan karunia-Nya sehingga penulis dapat menyelesaikan penyusunan Proposal Praktik Kerja Lapangan (PKL) ini dengan baik.
 
@@ -24,12 +24,11 @@ Penulis menyadari bahwa penyusunan proposal ini tidak lepas dari bimbingan, arah
 
 Penulis menyadari bahwa proposal ini masih jauh dari kesempurnaan. Oleh karena itu, kritik dan saran yang membangun sangat penulis harapkan demi kesempurnaan pelaksanaan kegiatan di masa mendatang.
 
-#v(1.5cm)
+#v(1.2cm)
 #align(right)[
-  #block(width: 6cm)[
+  #block(width: 5.5cm)[
     #set align(left)
     #kota, #tahun\
-    \
     #v(1.5cm)
     *Penulis*
   ]

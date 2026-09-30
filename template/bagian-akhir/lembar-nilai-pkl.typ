@@ -10,7 +10,7 @@
 // Konfigurasi file-nilai-perusahaan ada di metadata.typ
 
 #if file-nilai-perusahaan != none [
-  align(center)[
+  #align(center)[
     #text(size: 14pt, weight: "bold")[LEMBAR NILAI PKL]
   ]
   #v(0.5cm)
