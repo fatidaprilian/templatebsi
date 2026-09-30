@@ -1,0 +1,14 @@
+[package]
+name = "templatebsi"
+version = "0.1.0"
+entrypoint = "lib.typ"
+authors = ["Farid Aprilian <@ryuenn3123>"]
+license = "MIT"
+description = "Template Laporan PKL dan Skripsi Typst untuk Program Studi Teknologi Informasi Universitas Bina Sarana Informatika (UBSI)."
+repository = "https://github.com/fatidaprilian/templatelatexubsi"
+keywords = ["ubsi", "bsi", "skripsi", "pkl", "typst", "template"]
+categories = ["thesis"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
