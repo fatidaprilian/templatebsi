@@ -31,27 +31,23 @@
 // Kata Pengantar
 #include "bagian-awal/kata-pengantar.typ"
 
-// Daftar Isi
-#pagebreak()
-#outline(
-  title: [DAFTAR ISI],
-  indent: auto,
-  depth: 3,
-)
+// Daftar Isi (Sesuai Lampiran 18)
+#daftar-isi(tampilkan-catatan: tampilkan-catatan-pedoman)
 
 // Daftar Simbol
 #include "bagian-awal/daftar-simbol.typ"
 
 // Daftar Gambar (Sesuai Lampiran 21)
-#daftar-gambar()
+#daftar-gambar(tampilkan-catatan: tampilkan-catatan-pedoman)
 
 // Daftar Tabel (Sesuai Lampiran 22)
-#daftar-tabel()
+#daftar-tabel(tampilkan-catatan: tampilkan-catatan-pedoman)
 
 // Daftar Lampiran
 #include "bagian-awal/daftar-lampiran.typ"
 
 // 3. Bagian Pokok (Mainmatter: Angka Latin 1, 2, 3...)
+#pagebreak()
 #counter(page).update(1)
 
 #show: pkl.with(

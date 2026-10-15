@@ -5,22 +5,16 @@
 #import "../../lib.typ": *
 #import "../metadata.typ": *
 
-#pagebreak()
+#heading(level: 1, numbering: none, outlined: true)[Lembar Kuesioner]
 
 // Jika mahasiswa memiliki file tangkapan layar/scan bukti pengisian kuesioner (PNG/JPG)
 // Konfigurasi file-bukti-kuesioner ada di metadata.typ
 
 #if file-bukti-kuesioner != none [
-  #align(center)[
-    #text(size: 14pt, weight: "bold")[LEMBAR KUESIONER]
-  ]
   #v(0.5cm)
   #image(file-bukti-kuesioner, width: 100%)
 ] else [
-  #align(center)[
-    #text(size: 14pt, weight: "bold")[LEMBAR KUESIONER]
-  ]
-  #v(0.8cm)
+  #v(0.5cm)
 
   #block(
     width: 100%,
@@ -48,15 +42,17 @@
     ]
   ]
 
-  #v(1fr)
-  #block(
-    stroke: none,
-    inset: 0pt,
-  )[
-    #set text(size: 8.5pt, style: "italic")
-    #set par(leading: 4.5pt)
-    *Catatan:*\
-    - Setelah mendapatkan nilai dan sertifikat dari perusahaan, mahasiswa memberikan link kepada perusahaan terkait pengisian survey kepuasan pengguna pada link #link("http://tiny.cc/testi-pengguna-lulusan")[http://tiny.cc/testi-pengguna-lulusan]\
-    - Link Kuesioner ini diisi oleh pihak Perusahaan dan dilampirkan bukti pengisiannya (seperti contoh diatas) bersama dengan Surat Keterangan PKL dari Perusahaan/Instansi dan Lembar Penilaian PKL.
+  #if tampilkan-catatan-pedoman [
+    #v(1fr)
+    #block(
+      stroke: none,
+      inset: 0pt,
+    )[
+      #set text(size: 8.5pt, style: "italic")
+      #set par(leading: 4.5pt)
+      *Catatan (Hapus catatan ini setelah bukti kuesioner dilampirkan / sebelum dicetak):*\
+      - Setelah mendapatkan nilai dan sertifikat dari perusahaan, mahasiswa memberikan link kepada perusahaan terkait pengisian survey kepuasan pengguna pada link #link("http://tiny.cc/testi-pengguna-lulusan")[http://tiny.cc/testi-pengguna-lulusan]\
+      - Link Kuesioner ini diisi oleh pihak Perusahaan dan dilampirkan bukti pengisiannya (seperti contoh diatas) bersama dengan Surat Keterangan PKL dari Perusahaan/Instansi dan Lembar Penilaian PKL.
+    ]
   ]
 ]

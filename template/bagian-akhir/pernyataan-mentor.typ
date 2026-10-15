@@ -62,9 +62,11 @@ Demikian surat pernyataan ini dibuat dengan sesungguhnya untuk dapat digunakan s
   ]
 ]
 
-#v(1fr)
-#text(size: 8.5pt, style: "italic")[
-  *Catatan:*\
-  - Format Surat Pernyataan Mentor PKL ini digunakan untuk mengetahui mentor/pembimbing di perusahaan/instansi selama mahasiswa melaksanakan PKL.\
-  - Format ini digunakan jika perusahaan/instansi tidak memiliki format tersendiri
+#if tampilkan-catatan-pedoman [
+  #v(1fr)
+  #text(size: 8.5pt, style: "italic")[
+    *Catatan (Hapus catatan ini setelah surat pernyataan selesai diisi / sebelum dicetak):*\
+    - Format Surat Pernyataan Mentor PKL ini digunakan untuk mengetahui mentor/pembimbing di perusahaan/instansi selama mahasiswa melaksanakan PKL.\
+    - Format ini digunakan jika perusahaan/instansi tidak memiliki format tersendiri.
+  ]
 ]

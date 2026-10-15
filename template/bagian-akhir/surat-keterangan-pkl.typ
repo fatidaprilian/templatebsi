@@ -5,23 +5,17 @@
 #import "../../lib.typ": *
 #import "../metadata.typ": *
 
-#pagebreak()
+#heading(level: 1, numbering: none, outlined: true)[Surat Keterangan PKL]
 
 // Jika mahasiswa memiliki scan surat keterangan asli (JPG/PNG), tampilkan penuh
 // Konfigurasi file-surat-keterangan ada di metadata.typ
 
 #if file-surat-keterangan != none [
-  #align(center)[
-    #text(size: 14pt, weight: "bold")[SURAT KETERANGAN PKL]
-  ]
   #v(0.5cm)
   #image(file-surat-keterangan, width: 100%)
 ] else [
   // Format Template Resmi UBSI Sesuai Lampiran 26
-  align(center)[
-    #text(size: 14pt, weight: "bold")[SURAT KETERANGAN PKL]
-  ]
-  #v(1cm)
+  #v(0.5cm)
 
   #block(
     width: 100%,
@@ -72,18 +66,20 @@
         #kota, #tanggal-selesai-pkl\
         \
         #v(1.5cm)
-        *Nama Pembimbing Perusahaan, S.Kom*\
+        #underline("Nama Pembimbing Perusahaan, S.Kom, MM")\
         Kepala Divisi Teknologi Informasi
       ]
     ]
   ]
 
-  #v(1fr)
-  #text(size: 8.5pt, style: "italic")[
-    *Catatan:*\
-    - Surat Keterangan PKL Wajib terdapat KOP dan Nomor Surat\
-    - Surat Keterangan PKL disahkan menggunakan tanda tangan (bukan scan) pimpinan tempat PKL dan stempel asli atau QR Code resmi\
-    - Surat Keterangan PKL dapat berupa Sertifikat Pelaksanaan Kegiatan\
-    - Wajib mencantumkan keterangan telah melaksanakan PKL minimal 3 bulan
+  #if tampilkan-catatan-pedoman [
+    #v(1fr)
+    #text(size: 8.5pt, style: "italic")[
+      *Catatan (Hapus catatan ini setelah surat keterangan diisi / sebelum dicetak):*\
+      - Surat Keterangan PKL Wajib terdapat KOP dan Nomor Surat\
+      - Surat Keterangan PKL disahkan menggunakan tanda tangan (bukan scan) pimpinan tempat PKL dan diberikan Stempel (bukan scan) atau dapat digantikan dengan pengesahan berupa QR Code oleh perusahaan\
+      - Surat Keterangan PKL dapat berupa Sertifikat Pelaksanaan Kegiatan\
+      - Surat Keterangan PKL Wajib mencantumkan keterangan telah melaksanakan PKL dengan waktu pelaksanaan PKL minimal 3 bulan
+    ]
   ]
 ]

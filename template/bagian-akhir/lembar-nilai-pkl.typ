@@ -4,20 +4,17 @@
 #import "../../lib.typ": *
 #import "../metadata.typ": *
 
-#pagebreak()
+#heading(level: 1, numbering: none, outlined: true)[Nilai Praktik Kerja Lapangan]
 
 // Jika perusahaan memiliki format penilaian tersendiri, mahasiswa cukup melampirkan scannya
 // Konfigurasi file-nilai-perusahaan ada di metadata.typ
 
 #if file-nilai-perusahaan != none [
-  #align(center)[
-    #text(size: 14pt, weight: "bold")[LEMBAR NILAI PKL]
-  ]
   #v(0.5cm)
   #image(file-nilai-perusahaan, width: 100%)
 ] else [
   // Format Lampiran 27 Halaman 1: Formulir Penilaian 13 Unsur
-  align(center)[
+  #align(center)[
     #text(size: 13pt, weight: "bold")[FORMULIR PENILAIAN PRAKTIK KERJA LAPANGAN (PKL)]
   ]
   #v(0.5cm)
@@ -107,12 +104,14 @@
 #v(1.5cm)],
   )
 
-  #v(1.5cm)
-  #text(size: 8.5pt, style: "italic")[
-    *Catatan:*\
-    - Format Lembar Penilaian ini digunakan untuk mahasiswa yang mendapatkan Surat Keterangan PKL dari Perusahaan/Institusi\
-    - Format ini digunakan jika perusahaan/instansi tidak memiliki format penilaian tersendiri\
-    - Lembar Penilaian ini WAJIB dilampirkan dalam laporan Praktik Kerja Lapangan beserta Surat Keterangan PKL, dan harus asli.\
-    - Apabila di tempat PKL memiliki format penilaian tersendiri, maka yang dilampirkan adalah dari perusahaan atau instansi tempat PKL.
+  #if tampilkan-catatan-pedoman [
+    #v(1.5cm)
+    #text(size: 8.5pt, style: "italic")[
+      *Catatan (Hapus catatan ini setelah formulir dinilai / sebelum dicetak):*\
+      - Format Lembar Penilaian ini digunakan untuk mahasiswa yang mendapatkan Surat Keterangan PKL dari Perusahaan/Institusi\
+      - Format ini digunakan jika perusahaan/instansi tidak memiliki format penilaian tersendiri\
+      - Lembar Penilaian ini WAJIB dilampirkan dalam laporan Praktik Kerja Lapangan beserta Surat Keterangan PKL, dan harus asli.\
+      - Apabila di tempat PKL memiliki format penilaian tersendiri, maka yang dilampirkan adalah dari perusahaan atau instansi tempat PKL.
+    ]
   ]
 ]

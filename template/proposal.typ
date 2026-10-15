@@ -30,15 +30,11 @@
 // Kata Pengantar Proposal PKL (Halaman iii)
 #include "bagian-awal/kata-pengantar.typ"
 
-// Daftar Isi Proposal PKL (Halaman iv)
-#pagebreak()
-#outline(
-  title: [DAFTAR ISI],
-  indent: auto,
-  depth: 3,
-)
+// Daftar Isi Proposal PKL (Sesuai Lampiran 18)
+#daftar-isi()
 
 // 3. Bagian Pokok (Mainmatter: Angka Latin 1, 2, 3...)
+#pagebreak()
 #counter(page).update(1)
 
 #show: pkl.with(

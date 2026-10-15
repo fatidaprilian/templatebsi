@@ -4,11 +4,7 @@
 #import "../../lib.typ": *
 #import "../metadata.typ": *
 
-#pagebreak()
-#align(center)[
-  #text(size: 14pt, weight: "bold")[DAFTAR RIWAYAT HIDUP]
-]
-#v(1.5em)
+#heading(level: 1, numbering: none, outlined: true)[Daftar Riwayat Hidup]
 
 #set par(leading: 6pt) // 1 Spasi sesuai Catatan Lampiran 25
 
@@ -80,7 +76,10 @@
   ]
 )
 
-#v(1fr)
-#text(size: 9pt, style: "italic")[
-  *Catatan: Diketik dengan jarak satu spasi, dan tempelkan pas photo berlatar warna merah serta berdasi mengenakan jaket almamater*
+#if tampilkan-catatan-pedoman [
+  #v(1fr)
+  #text(size: 8.5pt, style: "italic")[
+    *Catatan (Hapus catatan petunjuk ini setelah foto ditempel / sebelum dicetak):*\
+    Diketik dengan jarak satu spasi, dan tempelkan pas photo berlatar warna merah serta berdasi mengenakan jaket almamater.
+  ]
 ]

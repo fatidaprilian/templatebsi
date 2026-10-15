@@ -36,13 +36,15 @@
   [5], [Jumat, 7 Ags 2026], [08.00 - 17.00], [Evaluasi mingguan bersama mentor lapangan], [],
 )
 
-#v(0.5cm)
-#text(size: 8.5pt)[
-  *Keterangan :*\
-  Mahasiswa diwajibkan untuk mengisi uraian kegiatan harian selama melaksanakan PKL.\
-  - No : Nomor urut kegiatan yang dilakukan\
-  - Hari/Tanggal : Hari dan Tanggal pelaksanaan kegiatan\
-  - Waktu : Waktu melakukan kegiatan PKL per harinya\
-  - Jenis Kegiatan : Kegiatan-kegiatan yang dilakukan\
-  - Tanda Tangan : Tanda tangan dari Pimpinan Unit / Mentor PKL.
+#if tampilkan-catatan-pedoman [
+  #v(0.5cm)
+  #text(size: 8.5pt, style: "italic")[
+    *Keterangan (Hapus catatan ini setelah form kegiatan selesai diisi / sebelum dicetak):*\
+    Mahasiswa diwajibkan untuk mengisi uraian kegiatan harian selama melaksanakan PKL.\
+    - No : Nomor urut kegiatan yang dilakukan\
+    - Hari/Tanggal : Hari dan Tanggal pelaksanaan kegiatan\
+    - Waktu : Waktu melakukan kegiatan PKL per harinya\
+    - Jenis Kegiatan : Kegiatan-kegiatan yang dilakukan\
+    - Tanda Tangan : Tanda tangan dari Pimpinan Unit / Mentor PKL.
+  ]
 ]

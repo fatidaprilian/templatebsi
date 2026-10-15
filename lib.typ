@@ -4,6 +4,38 @@
 // Universitas Bina Sarana Informatika
 // Berdasarkan Buku Pedoman Resmi PKL UBSI (Poin 2.1 - 2.7)
 // =============================================================================
+// FORMAT TAMPILAN JUDUL BAB & BAGIAN (Level 1) - Gambar 2 & Lampiran 18:
+// Huruf Kapital, 14pt, Tebal, Posisi di Tengah.
+// Jarak BAB ke Nama Judul: 2 spasi (14pt).
+// Jarak Judul Bab ke Sub-bab Pertama: 4 Spasi (48pt).
+// Untuk Bagian Awal/Akhir tanpa nomor bab: 2 spasi (24pt).
+// =============================================================================
+#let format-heading-level-1(it) = {
+  // Hidden anchor untuk cover dan lembar persetujuan agar terdaftar rapi di Daftar Isi
+  if it.body in ([Lembar Judul Laporan PKL], [Lembar Judul Proposal], [Lembar Persetujuan Laporan PKL], [Lembar Persetujuan Proposal PKL]) {
+    return none
+  }
+
+  pagebreak(weak: true)
+  // Reset nomor urut gambar dan tabel setiap pergantian bab
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: table)).update(0)
+  
+  align(center)[
+    #text(size: 14pt, weight: "bold")[
+      #if it.numbering != none [
+        #counter(heading).display()
+        #v(14pt) // 2 spasi antara "BAB ..." dan Judul Bab (Gambar 2)
+      ]
+      #upper(it.body)
+    ]
+  ]
+  if it.numbering != none {
+    v(48pt) // 4 spasi ke sub-bab berikutnya (Gambar 2)
+  } else {
+    v(24pt) // 2 spasi untuk bagian awal/akhir tanpa nomor bab
+  }
+}
 
 #let pkl(
   judul: "",
@@ -33,46 +65,44 @@
       right: 2.5cm,
       bottom: 2.5cm,
     ),
+    numbering: "1",
+    footer-descent: 0.3cm,
     // Penomoran Halaman Bagian Pokok Dinamis (Poin 2.4 & Gambar 1):
-    // - Halaman pertama BAB: Bawah Tengah (2 cm dari tepi bawah)
-    // - Halaman lanjutan dalam BAB: Kanan Atas (2 cm dari tepi atas)
+    // - Halaman pertama BAB: Bawah Tengah (margin footer 0.3 cm dari tepi bawah)
+    // - Halaman lanjutan dalam BAB: Kanan Atas
     header: context {
-      let page-num = counter(page).get().first()
-      let headings = query(heading.where(level: 1))
-      let is-chapter-first-page = headings.any(h => h.location().page() == page-num)
+      let is-chapter-first-page = query(heading.where(level: 1)).any(h => h.location().page() == here().page())
       
-      // Jika bukan halaman awal bab, nomor di pojok kanan atas
+      // Jika bukan halaman awal bab, nomor di pojok kanan atas (Poin 2.4.2 & Gambar 1)
       if not is-chapter-first-page {
-        align(right)[#text(size: 10pt)[#counter(page).display("1")]]
+        align(right)[#text(size: 12pt)[#counter(page).display("1")]]
       }
     },
     footer: context {
-      let page-num = counter(page).get().first()
-      let headings = query(heading.where(level: 1))
-      let is-chapter-first-page = headings.any(h => h.location().page() == page-num)
+      let is-chapter-first-page = query(heading.where(level: 1)).any(h => h.location().page() == here().page())
       
-      // Jika halaman awal bab, nomor di bagian bawah tengah
+      // Jika halaman awal bab, nomor di bagian bawah tengah (Poin 2.4.2 & Gambar 1)
       if is-chapter-first-page {
-        align(center)[#text(size: 10pt)[#counter(page).display("1")]]
+        align(center)[#text(size: 12pt)[#counter(page).display("1")]]
       }
     }
   )
 
   // 2. Tipografi: Times New Roman 12pt (Poin 2.1.4)
   set text(
-    font: ("Times New Roman", "Nimbus Roman No9 L", "Liberation Serif"),
+    font: "Times New Roman",
     size: 12pt,
     lang: "id",
   )
 
-  // 3. Spasi Pengetikan Teks: Spasi 2 (Double Spacing), Indentasi Alinea 1cm, Rata Kanan-Kiri
+  // 3. Spasi Pengetikan Teks: Spasi 2 (Double Spacing), Indentasi Alinea 1.2cm, Rata Kanan-Kiri
   set par(
     justify: true,
     leading: 12pt, // Spasi 2
     first-line-indent: 1.2cm,
   )
 
-  // 4. Penomoran Heading Sesuai Pedoman PKL (Poin 2.3 & Gambar):
+  // 4. Penomoran Heading Sesuai Pedoman PKL (Poin 2.3 & Gambar 2):
   // - Bab: Romawi (BAB I, BAB II)
   // - Sub-bab: Latin dengan titik penutup (2.1., 2.2.)
   // - Sub-sub-bab: Tiga digit dengan titik penutup (2.1.1., 2.1.2.)
@@ -85,43 +115,27 @@
     }
   })
 
-  // Format Tampilan Judul Bab (Level 1)
-  // Huruf Kapital, 14pt, Tebal, Posisi di Tengah, Jarak ke Teks/Sub-bab 4 Spasi
-  show heading.where(level: 1): it => {
-    pagebreak(weak: true)
-    // Reset nomor urut gambar dan tabel setiap pergantian bab
-    counter(figure.where(kind: image)).update(0)
-    counter(figure.where(kind: table)).update(0)
-    
-    align(center)[
-      #v(0.5cm)
-      #text(size: 14pt, weight: "bold")[
-        #if it.numbering != none [
-          #counter(heading).display()
-          #linebreak()
-        ]
-        #upper(it.body)
-      ]
-    ]
-    // Jarak 4 spasi (kurang lebih 24pt ke sub-bab/teks berikutnya sesuai gambar)
-    v(24pt)
-  }
+  // 5. Format Tampilan Judul Bab (Level 1) - Gambar 2 & Lampiran 18
+  show heading.where(level: 1): format-heading-level-1
 
-  // Format Tampilan Sub-bab (Level 2): 12pt, Tebal, Dimulai Margin Kiri
+  // Format Tampilan Sub-bab (Level 2) - Gambar 2:
+  // 12pt, Tebal, Dimulai Margin Kiri.
+  // Jarak sebelum sub-bab baru: 2 spasi (24pt). Jarak ke teks di bawahnya: 12pt.
   show heading.where(level: 2): it => {
-    v(16pt)
+    v(24pt) // 2 spasi sebelum sub-bab (Gambar 2)
     text(size: 12pt, weight: "bold")[#it]
-    v(8pt)
+    v(12pt)
   }
 
-  // Format Tampilan Sub-sub-bab (Level 3): 12pt, Tebal
+  // Format Tampilan Sub-sub-bab (Level 3) - Gambar 2:
+  // 12pt, Tebal, Dimulai Margin Kiri.
   show heading.where(level: 3): it => {
-    v(14pt)
+    v(20pt)
     text(size: 12pt, weight: "bold")[#it]
-    v(6pt)
+    v(10pt)
   }
 
-  // 5. Sistematika Poin Berjenjang (Poin 2.3 & Gambar):
+  // 5. Sistematika Poin Berjenjang (Poin 2.3 & Gambar 2):
   // 1. -> a. -> 1) -> a) -> (1)
   set enum(
     numbering: (..nums) => {
@@ -144,7 +158,7 @@
   )
 
   // 6. Penomoran Gambar & Tabel Menggunakan Angka Romawi Bab (Poin 2.5 & Gambar 2, 3):
-  // Contoh: Gambar III.1, Tabel IV.4
+  // Format dua baris terpusat: Baris 1 "Tabel IV.4." / "Gambar II.2.", Baris 2 Nama Judul.
   set figure(numbering: (..nums) => {
     let chap-nums = counter(heading.where(level: 1)).get()
     let chap-roman = if chap-nums.len() > 0 and chap-nums.first() > 0 {
@@ -153,15 +167,27 @@
       "I"
     }
     let fig-num = nums.pos().first()
-    chap-roman + "." + str(fig-num)
+    chap-roman + "." + str(fig-num) + "."
   })
 
-  // Format Judul Gambar: di bawah tengah gambar
+  // Format Caption Tabel & Gambar: 2 baris terpusat di tengah dengan separator ganti baris (Gambar 2 & 3)
+  set figure.caption(separator: [\ ])
+  show figure.caption: it => {
+    set text(size: 12pt)
+    align(center)[#it]
+  }
+
+  // Format Judul Gambar: di bawah tengah gambar (Poin 2.5.1 & Gambar 3)
   show figure.where(kind: image): set figure(supplement: [Gambar])
   
-  // Format Judul Tabel: di atas tengah tabel
+  // Format Judul Tabel: di atas tengah tabel (Poin 2.5.1 & Gambar 2)
   show figure.where(kind: table): set figure(supplement: [Tabel])
   show figure.where(kind: table): set figure.caption(position: top)
+
+  // Format Isi Tabel (Poin 2.1.3 & Gambar 2 Catatan):
+  // Font size disesuaikan (10pt, minimal 8pt), spasi tunggal (1 spasi)
+  show figure.where(kind: table): set text(size: 10pt)
+  show table: set par(leading: 6pt, justify: false)
 
   body
 }
@@ -184,23 +210,26 @@
   logo-path: "gambar/logo-ubsi.png",
 ) = {
   let label-jenis = if jenis == "proposal" {
-    "PROPOSAL PRAKTIK KERJA LAPANGAN"
+    [PROPOSAL\ PRAKTIK KERJA LAPANGAN]
   } else {
-    "LAPORAN PRAKTIK KERJA LAPANGAN"
+    [LAPORAN\ PRAKTIK KERJA LAPANGAN]
   }
 
   let sub-teks = if jenis == "proposal" {
     "Diajukan untuk memenuhi salah satu syarat pelaksanaan Mata Kuliah Praktik Kerja Lapangan"
   } else {
-    "Diajukan sebagai salah satu syarat untuk menyelesaikan Mata Kuliah Praktik Kerja Lapangan"
+    "Diajukan untuk memenuhi mata kuliah PKL pada Program " + jenjang
   }
 
   // Cover dihitung sebagai halaman i tetapi nomor tidak dicetak (Poin 2.4.1)
   page(
     header: none,
     footer: none,
+    numbering: "i",
     margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
   )[
+    #show heading: none
+    #heading(level: 1, numbering: none, outlined: true)[Lembar Judul Laporan PKL]
     #set align(center)
     #set par(leading: 6pt) // Spasi 1.5 untuk lembar judul
 
@@ -222,18 +251,19 @@
     #v(0.6cm)
     #text(size: 12pt)[#sub-teks]
 
-    // 5. Nama Penulis & NIM: 14pt, 1.5 Spasi
-    #v(1cm)
+    // 5. Nama Penulis & NIM: 14pt, 1.5 Spasi (Sesuai Lampiran 11)
+    #v(1.2cm)
     #text(size: 14pt, weight: "bold")[
-      Oleh:      #v(4pt)
-      #upper(penulis)      NIM. #nim
+      #upper(penulis)\
+      #v(6pt)
+      NIM : #nim
     ]
 
     #v(1fr)
 
     // 6. Nama Prodi, Fakultas, Universitas, Kota, Tahun: 12pt, 1.5 Spasi
     #text(size: 12pt, weight: "bold")[
-      Program Studi #program-studi #jenjang\
+      Program Studi #program-studi\
       Fakultas #fakultas\
       #universitas\
       #if is-kampus-utama and kota != none and kota != "" [
@@ -254,14 +284,15 @@
   set page(
     paper: "a4",
     margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
+    numbering: "i",
     header: none,
     footer: context {
       let page-num = counter(page).display("i")
-      align(center)[#text(size: 10pt)[#page-num]]
+      align(center)[#text(size: 12pt)[#page-num]]
     }
   )
   set text(
-    font: ("Times New Roman", "Nimbus Roman No9 L", "Liberation Serif"),
+    font: "Times New Roman",
     size: 12pt,
     lang: "id",
   )
@@ -270,6 +301,7 @@
     leading: 9pt, // 1.5 Spasi untuk bagian awal
     first-line-indent: 1.2cm, // Alinea baru menjorok 1.2 cm (5-7 ketukan)
   )
+  show heading.where(level: 1): format-heading-level-1
   body
 }
 
@@ -278,22 +310,22 @@
 // 1 Spasi, Menjorok Sesuai Ketukan Paragraf, Tanpa Tanda Kutip
 // =============================================================================
 #let kutipan-panjang(body, sumber: none) = {
-  v(8pt)
-  pad(left: 1cm)[
+  v(12pt)
+  pad(left: 1.2cm)[
     #set par(leading: 6pt, first-line-indent: 0cm, justify: true) // Spasi 1
     #text(size: 12pt)[
       #body
       #if sumber != none [ (#sumber)]
     ]
   ]
-  v(8pt)
+  v(12pt)
 }
 
 // =============================================================================
 // HELPER: SUMBER GAMBAR / TABEL - Gambar 2 & 3
 // =============================================================================
 #let sumber(teks) = {
-  align(left)[#text(size: 10pt, style: "italic")[Sumber: #teks]]
+  align(left)[#text(size: 10pt)[Sumber: #teks]]
 }
 
 // =============================================================================
@@ -315,8 +347,11 @@
   page(
     header: none,
     footer: none,
+    numbering: "i",
     margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
   )[
+    #show heading: none
+    #heading(level: 1, numbering: none, outlined: true)[Lembar Judul Proposal]
     #set align(center)
     #set par(leading: 6pt) // Spasi 1.5
 
@@ -324,17 +359,17 @@
     #v(1cm)
     #text(size: 14pt, weight: "bold")[#upper(judul)]
 
-    // 2. Logo Universitas Bina Sarana Informatika Berwarna
+    // 2. Logo Universitas Bina Sarana Informatika Berwarna (4x4 cm - Gambar 1)
     #v(3cm)
     #if logo-path != none [
-      #image(logo-path, width: 4.5cm, height: 4.5cm)
+      #image(logo-path, width: 4cm, height: 4cm)
     ]
 
     #v(3cm)
     // 3. Nama Mahasiswa & NIM
     #text(size: 14pt, weight: "bold")[#upper(penulis)]\
     #v(4pt)
-    #text(size: 14pt, weight: "bold")[NIM: #nim]
+    #text(size: 14pt, weight: "bold")[NIM : #nim]
 
     #v(1fr)
 
@@ -375,11 +410,14 @@
     header: none,
     footer: context {
       let page-num = counter(page).display("i")
-      align(center)[#text(size: 10pt)[#page-num]]
+      align(center)[#text(size: 12pt)[#page-num]]
     },
     margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
   )[
     #set par(leading: 8pt) // Spasi pengetikan persetujuan
+
+    #heading(level: 1, numbering: none, outlined: true)[Lembar Persetujuan Proposal PKL]
+    #let jenjang-label = if jenjang.contains("S1") or jenjang.contains("Sarjana") { "S1" } else { "D3" }
 
     #align(center)[
       #text(size: 14pt, weight: "bold")[
@@ -404,7 +442,7 @@
     )
 
     #v(0.5cm)
-    telah *disetujui* untuk permohonan PKL pada periode Semester #semester Tahun Akademik #tahun-akademik di #program-studi#if is-kampus-utama [ #fakultas] #universitas.
+    telah *disetujui* untuk permohonan PKL pada periode Semester #semester Tahun Akademik #tahun-akademik di Program Studi #program-studi (#jenjang-label) Fakultas #fakultas #universitas.
 
     #v(1cm)
     #align(center)[
@@ -430,7 +468,7 @@
     )[
       #set text(size: 9pt, style: "italic")
       #set par(leading: 4pt)
-      *Catatan:*\
+      *Catatan (Hapus catatan ini setelah selesai diisi / sebelum dicetak):*\
       - Nama Kelas diisi dengan kelas pada semester V (Program D3) dan Semester VII (Program S1)\
       - Nama Dosen PA diisi nama lengkap dan gelar dosen Penasehat Akademik\
       - Tanda Tangan dosen Penasehat Akademik *wajib* asli
@@ -439,47 +477,96 @@
 }
 
 // =============================================================================
+// HELPER: DAFTAR ISI (Lampiran 18)
+// Jarak 1 spasi, kolom Halaman di kanan atas, catatan kaki di bawah
+// =============================================================================
+#let daftar-isi(tampilkan-catatan: false) = {
+  heading(level: 1, numbering: none, outlined: true)[Daftar Isi]
+  align(right)[#text(size: 11pt, weight: "regular")[Halaman]]
+  v(0.3em)
+  {
+    set par(leading: 6pt) // 1 Spasi sesuai Catatan Lampiran 18
+    outline(
+      title: none,
+      indent: auto,
+      depth: 3,
+    )
+  }
+  if tampilkan-catatan {
+    v(1fr)
+    text(size: 8.5pt, style: "italic")[
+      *Catatan (Hapus catatan ini sebelum dijilid / dicetak):*\
+      Daftar Isi, Tabel, Gambar, dan Daftar Lampiran diketik dengan jarak 1 (satu) spasi
+    ]
+  }
+}
+
+// =============================================================================
 // HELPER: DAFTAR GAMBAR (Lampiran 21) & DAFTAR TABEL (Lampiran 22)
 // Jarak 1 spasi, kolom Halaman di kanan atas, catatan kaki di bawah
 // =============================================================================
-#let daftar-gambar() = {
-  pagebreak()
-  align(center)[#text(size: 14pt, weight: "bold")[DAFTAR GAMBAR]]
-  v(1em)
+#let daftar-gambar(tampilkan-catatan: false) = {
+  heading(level: 1, numbering: none, outlined: true)[Daftar Gambar]
   align(right)[#text(size: 11pt, weight: "regular")[Halaman]]
   v(0.3em)
   {
     set par(leading: 6pt) // 1 Spasi sesuai Catatan 1 Lampiran 21
+    let fig-counter = counter("daftar-gambar-counter")
+    fig-counter.update(0)
+    show outline.entry: it => {
+      if it.element != none and it.element.func() == figure and it.element.kind == image {
+        fig-counter.step()
+        context [
+          #fig-counter.display("1.") #it.element.supplement #it.element.counter.display(it.element.numbering) #it.element.caption.body #box(width: 1fr, it.fill) #it.element.location().page()\
+        ]
+      } else {
+        it
+      }
+    }
     outline(
       title: none,
       target: figure.where(kind: image),
     )
   }
-  v(1fr)
-  text(size: 9pt, style: "italic")[
-    *Catatan:*\
-    1. Daftar gambar, tabel, lampiran diketik dengan jarak satu spasi.
-  ]
+  if tampilkan-catatan {
+    v(1fr)
+    text(size: 8.5pt, style: "italic")[
+      *Catatan (Hapus catatan ini sebelum dijilid / dicetak):*\
+      1. Daftar gambar, tabel, lampiran diketik dengan jarak satu spasi.
+    ]
+  }
 }
 
-#let daftar-tabel() = {
-  pagebreak()
-  align(center)[#text(size: 14pt, weight: "bold")[DAFTAR TABEL]]
-  v(1em)
+#let daftar-tabel(tampilkan-catatan: false) = {
+  heading(level: 1, numbering: none, outlined: true)[Daftar Tabel]
   align(right)[#text(size: 11pt, weight: "regular")[Halaman]]
   v(0.3em)
   {
     set par(leading: 6pt) // 1 Spasi sesuai Catatan 1 Lampiran 22
+    let tbl-counter = counter("daftar-tabel-counter")
+    tbl-counter.update(0)
+    show outline.entry: it => {
+      if it.element != none and it.element.func() == figure and it.element.kind == table {
+        tbl-counter.step()
+        context [
+          #tbl-counter.display("1.") #it.element.supplement #it.element.counter.display(it.element.numbering) #it.element.caption.body #box(width: 1fr, it.fill) #it.element.location().page()\
+        ]
+      } else {
+        it
+      }
+    }
     outline(
       title: none,
       target: figure.where(kind: table),
     )
   }
-  v(1fr)
-  text(size: 9pt, style: "italic")[
-    *Catatan:*\
-    1. Daftar gambar, tabel, lampiran diketik dengan jarak satu spasi.
-  ]
+  if tampilkan-catatan {
+    v(1fr)
+    text(size: 8.5pt, style: "italic")[
+      *Catatan (Hapus catatan ini sebelum dijilid / dicetak):*\
+      1. Daftar gambar, tabel, lampiran diketik dengan jarak satu spasi.
+    ]
+  }
 }
 
 
@@ -491,18 +578,21 @@
   set page(
     paper: "a4",
     margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
+    numbering: "1",
     header: none,
     footer: context {
       let page-num = counter(page).display("1")
-      align(center)[#text(size: 10pt)[#page-num]]
+      align(center)[#text(size: 12pt)[#page-num]]
     }
   )
   set text(
-    font: ("Times New Roman", "Nimbus Roman No9 L", "Liberation Serif"),
+    font: "Times New Roman",
     size: 12pt,
     lang: "id",
   )
-  // Aturan 2.7 Poin 7: Setiap pustaka 1 spasi (rata kiri-kanan), antar pustaka 2 spasi
-  show bibliography: set par(leading: 6pt, spacing: 14pt, justify: true)
+  set heading(numbering: none)
+  show heading.where(level: 1): format-heading-level-1
+  // Aturan 2.7 Poin 7 & Gambar 2: Setiap pustaka 1 spasi (rata kiri-kanan), antar pustaka 2 spasi (24pt)
+  show bibliography: set par(leading: 6pt, spacing: 24pt, justify: true)
   body
 }
