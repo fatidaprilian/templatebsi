@@ -66,7 +66,8 @@
       bottom: 2.5cm,
     ),
     numbering: "1",
-    footer-descent: 0.3cm,
+    header-ascent: 1cm, // Jarak tepat 2 cm dari tepi atas (Poin 2.4.2)
+    footer-descent: 0.5cm, // Jarak tepat 2 cm dari tepi bawah (Poin 2.4.2)
     // Penomoran Halaman Bagian Pokok Dinamis (Poin 2.4 & Gambar 1):
     // - Halaman pertama BAB: Bawah Tengah (margin footer 0.3 cm dari tepi bawah)
     // - Halaman lanjutan dalam BAB: Kanan Atas
@@ -303,6 +304,7 @@
     paper: "a4",
     margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
     numbering: "i",
+    footer-descent: 0.5cm, // Jarak tepat 2 cm dari bawah (Poin 2.4.1)
     header: none,
     footer: context {
       let page-num = counter(page).display("i")
@@ -605,6 +607,7 @@
     paper: "a4",
     margin: (left: 4cm, top: 3cm, right: 2.5cm, bottom: 2.5cm),
     numbering: "1",
+    footer-descent: 0.5cm, // Jarak tepat 2 cm dari bawah (Poin 2.4.3)
     header: none,
     footer: context {
       let page-num = counter(page).display("1")
