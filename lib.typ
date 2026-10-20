@@ -153,7 +153,13 @@
         numbering("(1)", n)
       }
     },
-    indent: 1cm,
+    indent: 1.2cm,
+    body-indent: 0.5em,
+  )
+
+  // Format Rincian Poin Bullet (List): Otomatis menjorok 1.2 cm sejajar alinea baru
+  set list(
+    indent: 1.2cm,
     body-indent: 0.5em,
   )
 
@@ -301,6 +307,8 @@
     leading: 9pt, // 1.5 Spasi untuk bagian awal
     first-line-indent: (amount: 1.2cm, all: true), // Alinea baru menjorok 1.2 cm (5-7 ketukan)
   )
+  set list(indent: 1.2cm, body-indent: 0.5em)
+  set enum(indent: 1.2cm, body-indent: 0.5em)
   show heading.where(level: 1): format-heading-level-1
   body
 }
