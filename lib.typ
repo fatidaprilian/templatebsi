@@ -99,7 +99,7 @@
   set par(
     justify: true,
     leading: 12pt, // Spasi 2
-    first-line-indent: 1.2cm,
+    first-line-indent: (amount: 1.2cm, all: true),
   )
 
   // 4. Penomoran Heading Sesuai Pedoman PKL (Poin 2.3 & Gambar 2):
@@ -299,7 +299,7 @@
   set par(
     justify: true,
     leading: 9pt, // 1.5 Spasi untuk bagian awal
-    first-line-indent: 1.2cm, // Alinea baru menjorok 1.2 cm (5-7 ketukan)
+    first-line-indent: (amount: 1.2cm, all: true), // Alinea baru menjorok 1.2 cm (5-7 ketukan)
   )
   show heading.where(level: 1): format-heading-level-1
   body
@@ -327,6 +327,12 @@
 #let sumber(teks) = {
   align(left)[#text(size: 10pt)[Sumber: #teks]]
 }
+
+// =============================================================================
+// HELPER: SITASI NARATIF (Nama Penulis (Tahun))
+// Contoh: Menurut #sitasi-naratif(<pressman2014>), rekayasa perangkat lunak adalah ...
+// =============================================================================
+#let sitasi-naratif(key) = cite(key, form: "prose")
 
 // =============================================================================
 // LEMBAR COVER PROPOSAL PKL (Lampiran 1 & Lampiran 2)

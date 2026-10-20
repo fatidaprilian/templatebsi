@@ -211,7 +211,9 @@ Tulis konten naskah Anda pada berkas bab masing-masing. Seluruh format baku Pedo
 
 - **Sitasi & Daftar Pustaka (APA 6th Edition) – Poin 2.6 & 2.7:**
   - Tambahkan pustaka buku/jurnal ke berkas `template/pustaka.bib`.
-  - Sitasi pada teks: `@pressman2014` atau `@tanenbaum2011[hal. 12]`.
+  - **Sitasi dalam kurung (*Parenthetical*)**: Cukup tulis `@pressman2014` atau `@tanenbaum2011[hal. 12]`. Typst otomatis merendernya menjadi `(Pressman, 2014)`. *Jangan menambahkan tanda kurung manual seperti `(@pressman2014)` karena akan menghasilkan kurung dobel `((Pressman, 2014))`.*
+  - **Sitasi naratif dalam kalimat**: Gunakan `#cite(<pressman2014>, form: "prose")` atau helper `#sitasi-naratif(<pressman2014>)` agar tercetak alami: `Menurut Pressman (2014), ...`.
+  - **Penulis Institusi / Lembaga**: Pada `pustaka.bib`, bungkus dengan tanda kurung kurawal ganda, contoh: `author = {{Badan Pusat Statistik}}` agar nama lembaga tidak dipisah menjadi nama depan/belakang.
   - Daftar pustaka di akhir naskah otomatis diformat dengan *hanging indent*, spasi 1 per entri, dan spasi 2 antar-entri.
 
 #### Langkah 4: Melampirkan Berkas Scan Instansi (Opsional)
