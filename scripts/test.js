@@ -111,11 +111,53 @@ for (const tc of testCases) {
   }
 }
 
+console.log('\n--- Pengujian CLI Scaffolder ---');
+const cliTestCases = [
+  { name: 'CLI Proposal PKL (3 Bab)', args: '--type proposal --yes' },
+  { name: 'CLI Laporan PKL - Inovasi (Outline 1)', args: '--type laporan --outline 1 --yes' },
+  { name: 'CLI Laporan PKL - Mobile (Outline 2)', args: '--type laporan --outline 2 --yes' },
+  { name: 'CLI Laporan PKL - Jaringan (Outline 3)', args: '--type laporan --outline 3 --yes' },
+  { name: 'CLI Laporan PKL - Analisis Sistem (Outline 4)', args: '--type laporan --outline 4 --yes' },
+];
+
+const testScaffoldDir = path.join(repoRoot, 'temp_test_cli_scaffold');
+if (fs.existsSync(testScaffoldDir)) fs.rmSync(testScaffoldDir, { recursive: true, force: true });
+fs.mkdirSync(testScaffoldDir, { recursive: true });
+
+try {
+  for (let i = 0; i < cliTestCases.length; i++) {
+    const c = cliTestCases[i];
+    const projectDir = path.join(testScaffoldDir, `proj_${i}`);
+    process.stdout.write(`Testing ${c.name} ... `);
+    const start = Date.now();
+    try {
+      execSync(`node "${path.join(repoRoot, 'bin/cli.js')}" "${projectDir}" ${c.args}`, {
+        stdio: 'pipe',
+      });
+      const outputPdf = path.join(projectDir, 'output.pdf');
+      execSync(`"${typstBin}" compile main.typ output.pdf`, {
+        cwd: projectDir,
+        stdio: 'pipe',
+      });
+      const dur = Date.now() - start;
+      console.log(`PASS (${dur} ms)`);
+    } catch (err) {
+      console.log('FAIL');
+      console.error(err.stderr ? err.stderr.toString() : err.message);
+      failed++;
+    }
+  }
+} finally {
+  if (fs.existsSync(testScaffoldDir)) fs.rmSync(testScaffoldDir, { recursive: true, force: true });
+}
+
+const totalTests = testCases.length + cliTestCases.length;
 console.log('\n----------------------------------------');
 if (failed === 0) {
-  console.log(`Semua pengujian (${testCases.length}) BERHASIL.`);
+  console.log(`Semua pengujian (${totalTests}) BERHASIL.`);
   process.exit(0);
 } else {
-  console.error(`Ditemukan ${failed} kegagalan dari ${testCases.length} pengujian.`);
+  console.error(`Ditemukan ${failed} kegagalan dari ${totalTests} pengujian.`);
   process.exit(1);
 }
+

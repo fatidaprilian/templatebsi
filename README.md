@@ -80,8 +80,8 @@ templatebsi/
 │       ├── proposal/         # Bab 1 s.d. Bab 3 Proposal PKL
 │       ├── pkl-ti-inovasi/   # Outline 1: Proyek Inovasi Perangkat Lunak (6 Bab)
 │       ├── pkl-ti-mobile/    # Outline 2: Analisa Program Mobile (4 Bab)
-│       ├── pkl-ti-jaringan/  # Outline 3: Jaringan Komputer (4 Bab)
-│       └── pkl-ti-sistem/    # Outline 4: Analisis Sistem (4 Bab)
+│       ├── pkl-ti-jaringan/         # Outline 3: Jaringan Komputer (4 Bab)
+│       └── pkl-ti-analisis-sistem/  # Outline 4: Analisis Sistem (4 Bab)
 ```
 
 ---
@@ -95,11 +95,23 @@ Pilih salah satu metode kerja yang paling nyaman untuk Anda:
 #### Opsi A: Menggunakan CLI Scaffolder (Paling Praktis)
 Perintah ini akan membuat folder kerja mandiri yang hanya memuat outline pilihan Anda (tanpa folder outline lain):
 ```bash
+# Mode Interaktif:
 npx github:fatidaprilian/templatebsi <nama-folder-proyek>
+
+# Mode Otomatis / Non-interaktif:
+npx github:fatidaprilian/templatebsi my-laporan --type laporan --outline 1 --yes
+npx github:fatidaprilian/templatebsi my-proposal --type proposal --yes
+
+# Di dalam folder yang sudah ada / folder aktif (.):
+npx github:fatidaprilian/templatebsi . --force
 ```
-CLI interaktif akan memandu Anda:
-1. Memilih jenis naskah: **Proposal PKL** (3 Bab) atau **Laporan Akhir PKL**.
-2. Memilih topik outline: Inovasi Perangkat Lunak, Mobile, Jaringan, atau Analisis Sistem.
+
+CLI mendukung opsi flag berikut:
+- `-t, --type <proposal|laporan>` : Memilih jenis dokumen (proposal 3 bab atau laporan akhir).
+- `-o, --outline <1|2|3|4>` : Memilih outline laporan (1: Inovasi, 2: Mobile, 3: Jaringan, 4: Analisis Sistem).
+- `-y, --yes` : Menggunakan seluruh konfigurasi default tanpa prompt interaktif.
+- `-f, --force` : Mengizinkan inisialisasi pada direktori yang sudah ada atau menimpa berkas proyek yang konflik.
+- `-h, --help` : Menampilkan petunjuk opsi CLI.
 
 #### Opsi B: Menggunakan Visual Studio Code (Lokal)
 1. Pasang ekstensi **Tinymist Typst** (`myriad-dreamit.tinymist`) di VS Code.
@@ -153,7 +165,7 @@ Secara default, berkas `template/main.typ` memuat **Outline 1: Proyek Inovasi Pe
 - **Program Berbasis Mobile (4 Bab):**
   Ganti dengan folder `outlines/pkl-ti-mobile/bab1.typ` s.d. `bab4.typ`.
 - **Analisis Sistem (4 Bab):**
-  Ganti dengan folder `outlines/pkl-ti-sistem/bab1.typ` s.d. `bab4.typ`.
+  Ganti dengan folder `outlines/pkl-ti-analisis-sistem/bab1.typ` s.d. `bab4.typ`.
 
 *(Jika Anda menulis Proposal PKL, gunakan langsung `template/proposal.typ` yang memuat 3 Bab resmi).*
 
