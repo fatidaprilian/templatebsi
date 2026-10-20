@@ -102,6 +102,17 @@
     first-line-indent: (amount: 1.2cm, all: true),
   )
 
+  // 3b. Indentasi Rincian (List & Enum): Menjorok ke Dalam Sejajar Awal Alinea (1.2cm)
+  set list(
+    indent: 1.2cm,
+    body-indent: 0.5em,
+    marker: ([•], [--]),
+  )
+  set enum(
+    indent: 1.2cm,
+    body-indent: 0.5em,
+  )
+
   // 4. Penomoran Heading Sesuai Pedoman PKL (Poin 2.3 & Gambar 2):
   // - Bab: Romawi (BAB I, BAB II)
   // - Sub-bab: Latin dengan titik penutup (2.1., 2.2.)
@@ -161,6 +172,7 @@
   set list(
     indent: 1.2cm,
     body-indent: 0.5em,
+    marker: ([•], [--]),
   )
 
   // 6. Penomoran Gambar & Tabel Menggunakan Angka Romawi Bab (Poin 2.5 & Gambar 2, 3):
@@ -307,7 +319,7 @@
     leading: 9pt, // 1.5 Spasi untuk bagian awal
     first-line-indent: (amount: 1.2cm, all: true), // Alinea baru menjorok 1.2 cm (5-7 ketukan)
   )
-  set list(indent: 1.2cm, body-indent: 0.5em)
+  set list(indent: 1.2cm, body-indent: 0.5em, marker: ([•], [--]))
   set enum(indent: 1.2cm, body-indent: 0.5em)
   show heading.where(level: 1): format-heading-level-1
   body
